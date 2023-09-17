@@ -22,7 +22,7 @@ const App = () => {
     );
   };
 
-  // Part Component2
+  // Part Component
   const Part = (props) => {
     return (
       <div>
