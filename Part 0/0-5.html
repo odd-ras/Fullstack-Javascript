@@ -1,0 +1,18 @@
+<!-- Single Page App Diagram-->
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <pre class="mermaid">
+    sequenceDiagram
+        participant browser
+        participant server
+        browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa
+        server->>browser: HTML page
+        Note over server, browser: Rest of the pages are manipulated using JS running on the browser
+
+    </pre>
+    <script type="module">
+      import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    </script>
+  </body>
+</html>
