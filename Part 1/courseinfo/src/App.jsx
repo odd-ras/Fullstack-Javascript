@@ -1,34 +1,41 @@
 const App = () => {
-  // const-definitions
-  const course = "Half Stack application development";
-  const contentDescription = [
-    { part1: "Fundamentals of React", exercises1: 10 },
-    { part2: "Using props to pass data", exercises2: 7 },
-    { part3: "State of a component", exercises3: 14 },
-  ];
+  const course = {
+    name: "Half Stack application development",
+    parts: [
+      {
+        name: "Fundamentals of React",
+        exercises: 10,
+      },
+      {
+        name: "Using props to pass data",
+        exercises: 7,
+      },
+      {
+        name: "State of a component",
+        exercises: 14,
+      },
+    ],
+  };
 
-  //Total Component
+  // Header Component
+  const Header = (props) => {
+    return (
+      <div>
+        <p> {props.title} </p>
+      </div>
+    );
+  };
+
+  // Total Component
   const Total = (props) => {
     return (
       <div>
         <p>
           {" "}
           Number of exercises{" "}
-          {props.contents[0].exercises1 +
-            props.contents[1].exercises2 +
-            props.contents[2].exercises3}{" "}
-        </p>
-      </div>
-    );
-  };
-
-  // Part Component
-  const Part = (props) => {
-    return (
-      <div>
-        <p>
-          {" "}
-          {Object.values(props.items)[0]} {Object.values(props.items)[1]}{" "}
+          {props.parts[0].exercises +
+            props.parts[1].exercises +
+            props.parts[2].exercises}{" "}
         </p>
       </div>
     );
@@ -38,27 +45,36 @@ const App = () => {
   const Content = (props) => {
     return (
       <div>
-        <Part items={props.contents[0]} />
-        <Part items={props.contents[1]} />
-        <Part items={props.contents[2]} />
+        <Part arr={Object.values(props.parts)[1]} />
       </div>
     );
   };
 
-  // Header component
-  const Header = (props) => {
+  // Part Content
+  const Part = (props) => {
     return (
       <div>
-        <p>{props.course}</p>
+        <p>
+          {" "}
+          {props.arr[0].name} {props.arr[0].exercises}{" "}
+        </p>
+        <p>
+          {" "}
+          {props.arr[1].name} {props.arr[1].exercises}{" "}
+        </p>
+        <p>
+          {" "}
+          {props.arr[2].name} {props.arr[2].exercises}{" "}
+        </p>
       </div>
     );
   };
 
   return (
     <div>
-      <Header course={course} />
-      <Content contents={contentDescription} />
-      <Total contents={contentDescription} />
+      <Header title={course.name} />
+      <Content parts={course} />
+      <Total parts={course.parts} />
     </div>
   );
 };
