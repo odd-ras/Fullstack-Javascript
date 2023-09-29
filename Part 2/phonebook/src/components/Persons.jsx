@@ -1,14 +1,26 @@
-export default function Persons(props) {
-  const { filteredList } = props;
+export default function Persons({ persons, search }) {
   return (
-    <div>
-      <ul>
-        {filteredList.map((person, index) => (
-          <li key={index}>
-            {person.name} {person.number}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <table>
+      <thead>
+        <tr>
+          <th colSpan={2}>Contacts</th>
+        </tr>
+      </thead>
+      <tbody>
+        {persons
+          .filter((item) => {
+            return search.toLowerCase() === ""
+              ? item
+              : item.name.toLowerCase().includes(search.toLowerCase());
+          })
+          .map((person) => (
+            <tr key={person.id}>
+              <td>{person.name}: </td>
+              <td>{person.number}</td>
+              <td>{person.id}</td>
+            </tr>
+          ))}
+      </tbody>
+    </table>
   );
 }

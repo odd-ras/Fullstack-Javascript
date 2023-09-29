@@ -1,10 +1,7 @@
-import { useState } from "react";
-
-export default function Filter(props) {
+export default function Filter({ search, onFilter }) {
   return (
     <p>
-      {" "}
-      Filter shown with: <input onChange={props.onFilter} />{" "}
+      Search: <input value={search} onChange={onFilter} />{" "}
     </p>
   );
 }
