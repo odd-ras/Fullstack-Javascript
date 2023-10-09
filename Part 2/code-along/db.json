@@ -1,0 +1,44 @@
+{
+  "notes": [
+    {
+      "id": 1,
+      "content": "HTML is easy",
+      "important": true
+    },
+    {
+      "id": 2,
+      "content": "Browser can execute only JavaScript",
+      "important": false
+    },
+    {
+      "id": 3,
+      "content": "GET and POST are the most important methods of HTTP protocol",
+      "important": true
+    },
+    {
+      "content": "React is Hard",
+      "important": true,
+      "id": 4
+    },
+    {
+      "content": "CSS is Easy!",
+      "important": false,
+      "id": 5
+    },
+    {
+      "content": "CSS Only",
+      "important": false,
+      "id": 6
+    },
+    {
+      "content": "CSS is Easy",
+      "important": false,
+      "id": 7
+    },
+    {
+      "content": "New Note Added",
+      "important": false,
+      "id": 8
+    }
+  ]
+}

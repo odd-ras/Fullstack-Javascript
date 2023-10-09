@@ -1,4 +1,7 @@
-export default function Persons({ persons, search }) {
+import noteService from "../services/persons";
+import { useState } from "react";
+
+export default function Persons({ persons, search, setPersons }) {
   return (
     <table>
       <thead>
@@ -18,6 +21,24 @@ export default function Persons({ persons, search }) {
               <td>{person.name}: </td>
               <td>{person.number}</td>
               <td>{person.id}</td>
+              <td>
+                <button
+                  onClick={() => {
+                    if (window.confirm(`Delete Entry ${person.name}`)) {
+                      noteService.deleteEntry(person.id).then(() => {
+                        setPersons(persons.filter((p) => p.id !== person.id));
+                      });
+                      //setPersons(persons.filter((p) => p.id !== person.id));
+                    }
+
+                    // window.confirm(`Delete Entry ${person.name}?`)
+                    //   ? noteService.deleteEntry(person.id)
+                    //   : "";
+                  }}
+                >
+                  Delete
+                </button>
+              </td>
             </tr>
           ))}
       </tbody>
