@@ -3,10 +3,12 @@ import Persons from "./components/Persons";
 import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import noteService from "./services/persons";
+import Notification from "./components/Notification";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [searchValue, setSearchValue] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     noteService.getAll().then((allPersons) => {
@@ -23,8 +25,13 @@ const App = () => {
   return (
     <div>
       <h1>Phonebook</h1>
+      <Notification message={errorMessage} />
       <Filter search={searchValue} onFilter={handleSearchInput} />
-      <PersonForm persons={persons} setPersons={setPersons} />
+      <PersonForm
+        persons={persons}
+        setPersons={setPersons}
+        setErrorMessage={setErrorMessage}
+      />
       <hr></hr>
       <h1>Add New Contact</h1>
       <h1>Display Contacts</h1>

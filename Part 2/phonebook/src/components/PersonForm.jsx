@@ -2,7 +2,7 @@ import { useState } from "react";
 import noteService from "../services/persons";
 
 export default function PersonForm(props) {
-  const { persons, setPersons } = props;
+  const { persons, setPersons, setErrorMessage } = props;
   const [newEntry, setNewEntry] = useState({
     name: "",
     number: "",
@@ -41,13 +41,28 @@ export default function PersonForm(props) {
       window.confirm(
         `${newEntry.name} is already added to phonebook, replace the old number with a new one?`
       )
-        ? noteService.update(userId, changedPerson).then((updatedPerson) => {
-            setPersons(
-              persons.map((person) =>
-                person.name !== newEntry.name ? person : updatedPerson
-              )
-            );
-          })
+        ? noteService
+            .update(userId, changedPerson)
+            .then((updatedPerson) => {
+              setErrorMessage(`Updated ${updatedPerson.name}'s number`);
+              setTimeout(() => {
+                setErrorMessage(null);
+              }, 10000);
+              setPersons(
+                persons.map((person) =>
+                  person.name !== newEntry.name ? person : updatedPerson
+                )
+              );
+            })
+            .catch((error) => {
+              setErrorMessage(
+                `${changedPerson.name} was already deleted from the server!!`
+              );
+              setTimeout(() => {
+                setErrorMessage(null);
+              }, 10000);
+              setPersons(persons.filter((p) => p.name !== changedPerson.name));
+            })
         : "";
       setNewEntry({
         ...newEntry,
@@ -56,6 +71,10 @@ export default function PersonForm(props) {
       });
     } else {
       noteService.create(newEntry).then((newPersonObject) => {
+        setErrorMessage(`${newPersonObject.name} was successfully added!!`);
+        setTimeout(() => {
+          setErrorMessage(null);
+        }, 10000);
         setPersons(persons.concat(newPersonObject));
         setNewEntry({
           ...newEntry,
